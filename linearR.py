@@ -10,6 +10,7 @@ Created on Mon Jul  1 22:13:11 2019
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn import linear_model
 from pathlib import Path
 
 
@@ -69,8 +70,16 @@ iters = 1000
 g, cost = gradientDescent(X, y, theta, alpha, iters)
 
 #view the solution of the GD using .linspace and then evaluate the points
-x = np.linspace(data.Population.min(), data.Population.max(), 100)
-f = g[0, 0] + (g[0, 1] * x)
+#x = np.linspace(data.Population.min(), data.Population.max(), 100)
+#f = g[0, 0] + (g[0, 1] * x)
+
+#using sklearn, fit line to data easier
+model = linear_model.LinearRegression()
+model.fit(X, y)
+
+#using predict on fitted data/line to plot same data must comment out other x, f variables for this to work 
+x = np.array(X[:, 1].A1)
+f = model.predict(X).flatten()
 
 #-------------PLOT-------------#
 #plt_data = data.plot(kind='scatter', x='Population', y='Profit', figsize=(12,8))
@@ -89,7 +98,6 @@ ax.plot(np.arange(iters), cost, 'r')
 ax.set_xlabel('Iterations')
 ax.set_ylabel('Cost')
 ax.set_title('Error vs. Training Epoch')
-
 
 #-------------INITIATE-------------#
 if __name__ == '__main__':
