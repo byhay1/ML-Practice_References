@@ -12,31 +12,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-path = Path("/home/beebrain/Documents/ML-SelfStudy/Linear-Regression/ex1data1.txt")
-data = pd.read_csv(path, header=None, names=['Population','Profit'])
-data.head()
 
-#.describe describes the data and .plot plots it
-scribe_data = data.describe()
-#plt_data = data.plot(kind='scatter', x='Population', y='Profit', figsize=(12,8))
-
+#-------------FUNCTIONS-------------#
 # defining the Cost Function, using LeastSquares
 def computeCost(X, y, theta):
     inner = np.power(((X * theta.T)-y), 2)
     return np.sum(inner) / (2 * len(X))
-
-# append a ones column to the front of the data set
-data.insert(0,'Ones',1)
-
-# set X (training data) and y (target variable)
-cols = data.shape[1]
-X = data.iloc[:,0:cols-1]
-y = data.iloc[:,cols-1:cols] 
-
-# convert from data frames to numpy matrices
-X = np.matrix(X.values)
-y = np.matrix(y.values)
-theta = np.matrix(np.array([0,0]))
 
 # preform the gadient descent on the theta parameters (basically the derivative)
 #Compute the gradient of the error term in order to figure out the appropriate direction
@@ -58,6 +39,26 @@ def gradientDescent(X, y, theta, alpha, iters):
         
     return theta, cost
 
+#-------------VARIABLES-------------#
+path = Path("/home/beebrain/Documents/ML-SelfStudy/Linear-Regression/ex1data1.txt")
+data = pd.read_csv(path, header=None, names=['Population','Profit'])
+data.head()
+#.describe describes the data and .plot plots it
+scribe_data = data.describe()
+
+# append a ones column to the front of the data set
+data.insert(0,'Ones',1)
+
+# set X (training data) and y (target variable)
+cols = data.shape[1]
+X = data.iloc[:,0:cols-1]
+y = data.iloc[:,cols-1:cols] 
+
+# convert from data frames to numpy matrices
+X = np.matrix(X.values)
+y = np.matrix(y.values)
+theta = np.matrix(np.array([0,0]))
+
 # initialize variables for learning rate and iterations
 #alpha is the learning rate; helps determine how quickly the algorith will converge to the optimal solution
 #iters is the number of steps (iterations)
@@ -70,6 +71,9 @@ g, cost = gradientDescent(X, y, theta, alpha, iters)
 #view the solution of the GD using .linspace and then evaluate the points
 x = np.linspace(data.Population.min(), data.Population.max(), 100)
 f = g[0, 0] + (g[0, 1] * x)
+
+#-------------PLOT-------------#
+#plt_data = data.plot(kind='scatter', x='Population', y='Profit', figsize=(12,8))
 
 fig, ax = plt.subplots(figsize=(12,8))
 ax.plot(x, f, 'r', label='Prediction')
@@ -87,6 +91,7 @@ ax.set_ylabel('Cost')
 ax.set_title('Error vs. Training Epoch')
 
 
+#-------------INITIATE-------------#
 if __name__ == '__main__':
     #print(data)
     #print(scribe_data)
