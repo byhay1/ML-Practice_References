@@ -42,7 +42,7 @@ def gradientDescent(X, y, theta, alpha, iters):
     return theta, cost
 
 #-------------VARIABLES-------------#
-path = Path('/home/beebrain/Documents/ML-SelfStudy/Linear-Regression/ex1data2.txt')
+path = Path('/home/beehive/Documents/ML-SelfStudy/Linear-Regression/ex1data2.txt')
 data = pd.read_csv(path, header=None, names=['Size', 'Bedrooms', 'Price'])
 
 # conduct feature normalization to prevent the prediction from being weighted to far one way:
@@ -76,7 +76,8 @@ cost_error = computeCost(X2, y2, g2)
 
 #using sklearn, simply get the linear regression task completed
 model = linear_model.LinearRegression()
-sk_simple_lr = model.fit(X,y)
+sk_simple_lr = model.fit(X2,y2)
+
 
 #-------------PLOT-------------#
 #plot thge training progress, confirming the error was decreasing with each iteration.
@@ -93,5 +94,5 @@ if __name__ == '__main__':
     #print(data)\
     print(cost_error)
     print(g2)
-    print(sk_model_lr)
+    print(sk_simple_lr)
     
