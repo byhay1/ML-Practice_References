@@ -3,4 +3,5 @@
 ## Thank you to the following: 
 * johnwittenauer
 * Andrew Ng
+* sentdex
 * MIT eDX (for killing my confidence and then initializing my journey)
