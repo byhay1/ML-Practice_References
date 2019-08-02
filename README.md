@@ -4,4 +4,5 @@
 * johnwittenauer
 * Andrew Ng
 * sentdex
+* Keith Galli
 * MIT eDX (for killing my confidence and then initializing my journey)
