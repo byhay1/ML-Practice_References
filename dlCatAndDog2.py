@@ -121,4 +121,4 @@ model.fit(X, y, batch_size=32, epochs = 3, validation_split=0.1)
 #-------------INITIATE-------------#
 if __name__ == '__main__': 
     #pass
-    print("Start Training CNN Model")
+    print("End Training CNN Model")
